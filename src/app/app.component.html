@@ -1,0 +1,39 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<div class="progress-panel">
+  <p>Total estimated panel</p>
+  <p>Planned: {{totalPlanned}} hs.</p>
+  <p>In Progress: {{totalInProgress}} hs.</p>
+  <p>Completed: {{totalCompleted}} hs.</p>
+</div>
+
+<div *ngIf="tasksData">
+  <mat-card [ngClass]="{'example-card': true, 'completed-class': task.state == 'Completed', 'inprogress-class': task.state == 'In Progress'}"
+    *ngFor="let task of tasksData">
+    <mat-card-header>
+      <mat-card-title>{{task.name}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        Description: {{task.description}}
+      </p>
+      <p>Estimated: {{task.estimate}} hs.</p>
+      <p>Status: {{task.state}}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button *ngIf="task.state !== 'Completed'" mat-flat-button (click)="editTask(task)">Edit</button>
+      <button mat-flat-button (click)="deleteTask(task)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<button class="addTask" mat-flat-button (click)="openDialog()">
+  <mat-icon svgIcon="add"></mat-icon>
+</button>
