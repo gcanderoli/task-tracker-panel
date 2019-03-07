@@ -87,6 +87,7 @@ export class AppComponent implements OnInit {
     });
   }
 
+  // filter and sum estimates by status
   sumHs(status) {
     return this.tasksData
       .filter(task => task.state === status)
